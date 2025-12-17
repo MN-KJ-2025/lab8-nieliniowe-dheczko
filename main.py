@@ -115,7 +115,7 @@ def bisection(
         act_iter += 1
         c = (a + b) / 2
 
-        if np.abs(f(c)) <= epsilon or np.abs(c-a) <= epsilon * np.abs(c):
+        if np.abs(f(c)) <= epsilon:
             break
         
         if f(a)*f(c) <= 0:
