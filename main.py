@@ -150,7 +150,29 @@ def secant(
             - Liczba wykonanych iteracji.
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    
+    if not isinstance(a, (int, float)) or not isinstance(b, (int, float)) or not isinstance(epsilon, float) or not isinstance(max_iters, int):
+        return None
+    
+    if a > b or epsilon <= 0 or max_iters <= 0 or f(a)*f(b) >= 0:
+        return None
+    
+    act_iter = 0
+    while act_iter < max_iters:
+        act_iter += 1
+        
+        x = (f(b) - f(a)) / (b - a)
+        c = (x*b - f(b)) / x
+
+        if abs(f(c)) < epsilon:
+            return c, act_iter
+        
+        if f(a)*f(c) < 0:
+            b = c
+        else:
+            a = c
+    
+    return c, act_iter
 
 
 def difference_quotient(
